@@ -82,5 +82,3 @@ for (let i = 0; i < games.length; i++) {
    const power = red * green * blue;
    sum += power;
 }
-
-console.log('sum', sum);
