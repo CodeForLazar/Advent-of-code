@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path')
 
 const puzzle = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8');
-const lines = puzzle.split('\n');
+const lines = puzzle.split('\r\n');
 
 exports.fistStar = () => {
    let sum = 0;
    for (let i = 0; i < lines.length; ++i) {
-      let line = lines[i].trim();
+      let line = lines[i];
       let min = '';
       let max = '';
 
