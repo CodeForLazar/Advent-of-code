@@ -35,7 +35,7 @@ let sum = 0;
 
 // Second Star
 
-let copies = new Array(formatData.length).fill(1);
+let numOfCards = new Array(formatData.length).fill(1);
 
 for (let i = 0; i < formatData.length; i++) {
    const [rowOne, rowTwo] = formatData[i];
@@ -52,10 +52,10 @@ for (let i = 0; i < formatData.length; i++) {
 
    for (let d = 1; d <= numOfCopies; d++) {
       const next = i + d;
-      copies[next] = copies[next] + copies[i];
+      numOfCards[next] = numOfCards[next] + numOfCards[i];
    }
 }
-console.log('copies', copies)
-sum = copies.reduce((acc, currentValue) => acc + currentValue, 0);
 
-console.log('sum', sum)
+sum = numOfCards.reduce((acc, currentValue) => acc + currentValue, 0);
+
+console.log('sum', sum);
