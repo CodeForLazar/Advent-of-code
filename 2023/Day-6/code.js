@@ -7,13 +7,14 @@ const game = data.map((info) => info.split(':')[1].trim().replace(/^\s+|\s+$|\s+
 
 exports.fistStar = () => {
    let sum = 1;
-   let waysToWin = [0, 0, 0, 0];
+   let waysToWin = [];
    const time = game[0];
    const distance = game[1];
    for (let i = 0; i < time.length; i++) {
       const timeVal = time[i];
       const DistanceVal = distance[i];
       let buttonHold = timeVal;
+      waysToWin.push(0);
       for (let sec = 0; sec <= timeVal; sec++) {
          if (sec * buttonHold > DistanceVal) {
             waysToWin[i]++;
@@ -29,5 +30,5 @@ exports.fistStar = () => {
 exports.secondStar = () => {
    let sum = 0;
 
-   console.log('DaySix-PartOne', sum);
+   console.log('DaySix-PartTwo', sum);
 };
