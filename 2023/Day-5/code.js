@@ -1,50 +1,45 @@
 const fs = require('fs');
 const path = require('path');
-const lines = fs.readFileSync(path.resolve(__dirname, 'input.txt'), 'utf8').split('\r\n');
+const data = fs.readFileSync(path.resolve(__dirname, 'input.txt'), 'utf8').split('\r\n');
 
 exports.fistStar = () => {
-    const result = {
-        seeds: [],
-        mappers: []
-    } 
-    const seedLine = lines.shift();
-    result.seeds = seedLine.substring(7).split(" ").map(s => parseInt(s, 10));
-    lines.shift();
+   let sum = [];
+   const seeds = data.shift().split(': ')[1].split(' ');
+   let formatData = [];
+   let index = -1;
+   data
+      .filter((space) => space !== '')
+      .forEach((line) => {
+         const formatLine = line.split(' ');
+         if (isNaN(formatLine[0])) {
+            formatData.push([]);
+            index++;
+         } else {
+            formatData[index].push(formatLine);
+         }
+      });
 
-    while (lines.length > 0) {
-        lines.shift();
-        const mapper = [];
-        let mapperLine = lines.shift();
-        while (mapperLine) {
-            const mmatch = mapperLine.match(/^(\d+) (\d+) (\d+)$/);
-            mapper.push([parseInt(mmatch[1], 10), parseInt(mmatch[2], 10), parseInt(mmatch[3], 10)]);
-            mapperLine = lines.shift();
-        }
-        result.mappers.push(mapper);
-    }
-    const processSeed = (seed, mappers) => {
-      let result = seed;
-      for (const mapper of mappers) {
-          result = processMapper(result, mapper);
-          //console.log(result);
+   for (let i = 0; i < seeds.length; i++) {
+      let seed = +seeds[i];
+
+      for (let d = 0; d < formatData.length; d++) {
+         const line = formatData[d];
+
+         for (const row of line) {
+            const end = +row[0];
+            const start = +row[1];
+            const length = +row[2];
+            if (seed < +length + +start && seed >= +start) {
+               seed = +end + +seed - +start;
+               sum[i] = seed;
+               break;
+            }
+         }
       }
-      //console.log("----");
-      return result;
-  };
-
-  const processMapper = (seed, mapper)=> {
-   for (const [destination, source, duration] of mapper) {
-       if ((seed >= source) && (seed < duration + source)) {
-           return destination + seed - source;
-       }
    }
-   return seed;
+
+   console.log('data', Math.min(...sum));
 };
-
-
-   const location = result.seeds.map(s => processSeed(s, result.mappers));
- console.log('first', location) 
-}
 
 exports.secondStar = () => {
    let sum = 0;
