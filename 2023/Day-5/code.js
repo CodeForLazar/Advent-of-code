@@ -29,8 +29,8 @@ exports.fistStar = () => {
             const end = +row[0];
             const start = +row[1];
             const length = +row[2];
-            if (seed < +length + +start && seed >= +start) {
-               seed = +end + +seed - +start;
+            if (seed < length + start && seed >= start) {
+               seed = end + seed - start;
                sum[i] = seed;
                break;
             }
@@ -42,7 +42,7 @@ exports.fistStar = () => {
 };
 
 exports.secondStar = () => {
-   let sum = 0;
+   let sum = [];
 
-   console.log('DaySeven-PartTwo', sum);
+   console.log('sum', sum);
 };

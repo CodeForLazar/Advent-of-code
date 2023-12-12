@@ -5,20 +5,20 @@ const dayFive = require('./Day-5/code');
 const daySix = require('./Day-6/code');
 const daySeven = require('./Day-7/code');
 
-// dayOne.fistStar();
-// dayOne.secondStar();
+dayOne.fistStar();
+dayOne.secondStar();
 
-// dayTwo.fistStar();
-// dayTwo.secondStar();
+dayTwo.fistStar();
+dayTwo.secondStar();
 
-// dayFour.fistStar();
-// dayFour.secondStar();
+dayFour.fistStar();
+dayFour.secondStar();
 
 dayFive.fistStar();
 dayFive.secondStar();
 
-// daySix.fistStar();
-// daySix.secondStar();
+daySix.fistStar();
+daySix.secondStar();
 
 // daySeven.fistStar();
 // daySeven.secondStar();
