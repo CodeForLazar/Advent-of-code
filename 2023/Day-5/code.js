@@ -38,11 +38,11 @@ exports.fistStar = () => {
       }
    }
 
-   console.log('data', Math.min(...sum));
+   console.log('DayFive-PartOne', Math.min(...sum));
 };
 
 exports.secondStar = () => {
    let sum = [];
 
-   console.log('sum', sum);
+   console.log('DayFive-PartTwo', sum);
 };
