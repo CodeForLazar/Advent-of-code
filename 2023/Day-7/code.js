@@ -71,7 +71,7 @@ exports.fistStar = () => {
             let hasDifferent = combinations.filter(([_, copy]) => copy !== 3);
             if (hasPair.length === 1) {
                threeTwo.push({ cards, bid });
-            } else if (hasDifferent === 2) {
+            } else if (hasDifferent.length === 2) {
                three.push({ cards, bid });
             }
             break;
