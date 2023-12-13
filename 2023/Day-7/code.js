@@ -71,22 +71,27 @@ exports.fistStar = () => {
             let hasDifferent = combinations.filter(([_, copy]) => copy !== 3);
             if (hasPair.length === 1) {
                threeTwo.push({ cards, bid });
+               break;
             } else if (hasDifferent.length === 2) {
                three.push({ cards, bid });
+               break;
             }
-            break;
          } else if (count === 2) {
             const hasPair = combinations.filter(([_, copy]) => copy === 2);
             let hasDifferent = combinations.filter(([_, copy]) => copy !== 2);
             if (hasPair.length === 2) {
                twoTwo.push({ cards, bid });
+               break;
             } else if (hasPair.length === 1 && hasDifferent.length === 3) {
                two.push({ cards, bid });
+               break;
             }
-            break;
-         } else if (combinations.every((hand) => hand[1] === 1)) {
-            none.push({ cards, bid });
-            break;
+         } else if (count === 1) {
+            const noPair = combinations.filter(([_, copy]) => copy === 1);
+            if (noPair.length === 5) {
+               none.push({ cards, bid });
+               break;
+            }
          }
       }
    }
