@@ -58,7 +58,6 @@ exports.fistStar = () => {
       }
 
       const combinations = Object.entries(copies);
-
       for (let d = 0; d < combinations.length; d++) {
          const [_, count] = combinations[d];
          if (count === 5) {
@@ -68,20 +67,21 @@ exports.fistStar = () => {
             four.push({ cards, bid });
             break;
          } else if (count === 3) {
-            const hasPair = combinations.some(([_, countTwo]) => countTwo === 2);
-
-            if (hasPair) {
+            const hasPair = combinations.filter(([_, copy]) => copy === 2);
+            let hasDifferent = combinations.filter(([_, copy]) => copy !== 3);
+            if (hasPair.length === 1) {
                threeTwo.push({ cards, bid });
-            } else {
+            } else if (hasDifferent === 2) {
                three.push({ cards, bid });
             }
             break;
          } else if (count === 2) {
             const hasPair = combinations.filter(([_, copy]) => copy === 2);
-            if (hasPair.length === 1) {
-               two.push({ cards, bid });
-            } else {
+            let hasDifferent = combinations.filter(([_, copy]) => copy !== 2);
+            if (hasPair.length === 2) {
                twoTwo.push({ cards, bid });
+            } else if (hasPair.length === 1 && hasDifferent.length === 3) {
+               two.push({ cards, bid });
             }
             break;
          } else if (combinations.every((hand) => hand[1] === 1)) {
