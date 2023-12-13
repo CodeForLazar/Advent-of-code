@@ -40,7 +40,7 @@ const mapCardsJoker = {
 const joker = 'J';
 
 const sortFunc = (hands, isJoker) => {
-   return hands.toSorted((a, b) => {
+   return hands.sort((a, b) => {
       for (let i = 0; i < a.cards.length; i++) {
          const card = isJoker ? mapCardsJoker[a.cards[i]] : mapCards[a.cards[i]];
          const card2 = isJoker ? mapCardsJoker[b.cards[i]] : mapCards[b.cards[i]];
@@ -55,15 +55,16 @@ const sortFunc = (hands, isJoker) => {
    });
 };
 
-const hasJoker = (combo, count) => {
-   const nonComboCards = combo.filter(([J, copy]) => copy !== count);
-   return nonComboCards.filter(([J, copy]) => J === joker).length;
-};
+const pairJokerCards = (combo, count) => {
+   let nonPairJokerCards = []
+   nonPairJokerCards = combo.filter(([J, copy]) => copy !== count);
+   nonPairJokerCards = nonPairJokerCards.filter(([J, copy]) => J === joker).length;
 
-const hasJokerTwo = (combo) => {
-   let checkForTwoTwo = combo.filter(([J, copy]) => copy === 2);
-   let checkForJokers = checkForTwoTwo.filter(([J, copy]) => J === joker).length;
-   return checkForJokers;
+   let pairJokerCards = []
+   pairJokerCards = combo.filter(([J, copy]) => copy === count);
+   pairJokerCards = pairJokerCards.filter(([J, copy]) => J === joker).length;
+
+   return [pairJokerCards, nonPairJokerCards]
 };
 
 exports.fistStar = () => {
@@ -162,26 +163,38 @@ exports.secondStar = () => {
             five.push({ cards, bid });
             break;
          } else if (count === 4) {
-            const jokers = hasJoker(combinations, 4);
-            if (jokers === 1) {
+            const [pairJ, nonJ] = pairJokerCards(combinations, 4)
+            if (nonJ === 1) {
+               five.push({ cards, bid });
+               break;
+            }
+            if (pairJ === 1) {
                five.push({ cards, bid });
                break;
             }
             four.push({ cards, bid });
             break;
          } else if (count === 3) {
-            const jokers = hasJoker(combinations, 3);
             const hasPair = combinations.filter(([_, copy]) => copy === 2);
             let hasDifferent = combinations.filter(([_, copy]) => copy !== 3);
+            const [pairJ, nonJ] = pairJokerCards(combinations, 3)
             if (hasPair.length === 1) {
-               if (jokers === 1) {
+               if (pairJ === 1) {
+                  five.push({ cards, bid });
+                  break;
+               }
+               if (nonJ === 1) {
                   five.push({ cards, bid });
                   break;
                }
                threeTwo.push({ cards, bid });
                break;
             } else if (hasDifferent.length === 2) {
-               if (jokers === 1) {
+               if (pairJ === 1) {
+                  four.push({ cards, bid });
+                  break;
+               }
+               if (nonJ === 1) {
                   four.push({ cards, bid });
                   break;
                }
@@ -191,22 +204,24 @@ exports.secondStar = () => {
          } else if (count === 2) {
             const hasPair = combinations.filter(([_, copy]) => copy === 2);
             let hasDifferent = combinations.filter(([_, copy]) => copy !== 2);
+            const [pairJ, nonJ] = pairJokerCards(combinations, 2)
             if (hasPair.length === 2) {
-               const jokers2 = hasJokerTwo(combinations);
-               const jokers = hasJoker(combinations, 2);
-               if (jokers2 === 1) {
+               if (pairJ === 1) {
                   four.push({ cards, bid });
                   break;
                }
-               if (jokers === 1) {
-                  three.push({ cards, bid });
+               if (nonJ === 1) {
+                  threeTwo.push({ cards, bid });
                   break;
                }
                twoTwo.push({ cards, bid });
                break;
             } else if (hasPair.length === 1 && hasDifferent.length === 3) {
-               const jokers = hasJoker(combinations, 2);
-               if (jokers === 1) {
+               if (nonJ === 1) {
+                  three.push({ cards, bid });
+                  break;
+               }
+               if (pairJ === 1) {
                   three.push({ cards, bid });
                   break;
                }
@@ -216,9 +231,10 @@ exports.secondStar = () => {
          } else if (count === 1) {
             const noPair = combinations.filter(([_, copy]) => copy === 1);
             if (noPair.length === 5) {
-               const jokers = hasJoker(combinations, 1);
-               if (!!jokers) {
+               const [pairJ, nonJ] = pairJokerCards(combinations, 1)
+               if (pairJ === 1) {
                   two.push({ cards, bid });
+                  break
                }
                none.push({ cards, bid });
                break;
