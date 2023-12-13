@@ -12,6 +12,7 @@ const mapCards = {
    4: 4,
    5: 5,
    6: 6,
+   7: 7,
    8: 8,
    9: 9,
    T: 10,
@@ -21,13 +22,35 @@ const mapCards = {
    A: 14
 };
 
+const sortFunc = (hands) => {
+   return hands.toSorted((a, b) => {
+      for (let i = 0; i < a.cards.length; i++) {
+         const card = mapCards[a.cards[i]];
+         const card2 = mapCards[b.cards[i]];
+
+         if (card < card2) {
+            return -1;
+         } else if (card > card2) {
+            return 1;
+         }
+      }
+      return 0;
+   });
+};
+
 exports.fistStar = () => {
    let sum = 0;
-   let hands = [];
-   let rank = [];
+   let none = [];
+   let two = [];
+   let twoTwo = [];
+   let three = [];
+   let threeTwo = [];
+   let four = [];
+   let five = [];
 
    for (let [cards, bid] of game) {
       const copies = {};
+      bid = +bid;
 
       for (let i = 0; i < cards.length; i++) {
          const card = cards[i];
@@ -35,50 +58,49 @@ exports.fistStar = () => {
       }
 
       const combinations = Object.entries(copies);
-      if (combinations.every((hand) => hand[1] === 1)) {
-         hands.push({ combo: 'none', cards, bid });
-         continue;
-      }
 
       for (let d = 0; d < combinations.length; d++) {
          const [_, count] = combinations[d];
          if (count === 5) {
-            hands.push({ combo: 'five', cards, bid });
+            five.push({ cards, bid });
             break;
          } else if (count === 4) {
-            hands.push({ combo: 'four', cards, bid });
+            four.push({ cards, bid });
             break;
          } else if (count === 3) {
             const hasPair = combinations.some(([_, countTwo]) => countTwo === 2);
 
             if (hasPair) {
-               hands.push({ combo: 'threeTwo', cards, bid });
+               threeTwo.push({ cards, bid });
             } else {
-               hands.push({ combo: 'three', cards, bid });
+               three.push({ cards, bid });
             }
             break;
          } else if (count === 2) {
             const hasPair = combinations.filter(([_, copy]) => copy === 2);
             if (hasPair.length === 1) {
-               hands.push({ combo: 'two', cards, bid });
+               two.push({ cards, bid });
             } else {
-               hands.push({ combo: 'TwoTwo', cards, bid });
+               twoTwo.push({ cards, bid });
             }
+            break;
+         } else if (combinations.every((hand) => hand[1] === 1)) {
+            none.push({ cards, bid });
             break;
          }
       }
    }
 
-   for (let q = 0; q < hands.length; q++) {
-      const handOne = hands[q];
-      for (let w = 1; w < hands.length; w++) {
-         const handTwo = array[w];
-
-      }
-      
-   }
-
-   console.log('DaySeven-PartOne', hands);
+   five = sortFunc(five);
+   four = sortFunc(four);
+   threeTwo = sortFunc(threeTwo);
+   three = sortFunc(three);
+   twoTwo = sortFunc(twoTwo);
+   two = sortFunc(two);
+   none = sortFunc(none);
+   const sortedHands = [...none, ...two, ...twoTwo, ...three, ...threeTwo, ...four, ...five];
+   sum = sortedHands.reduce((acc, hand, idx) => acc + hand.bid * (idx + 1), 0);
+   console.log('DaySeven-PartOne', sum);
 };
 
 exports.secondStar = () => {
