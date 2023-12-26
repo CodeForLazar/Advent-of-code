@@ -177,7 +177,7 @@ exports.secondStar = () => {
 
       j++;
 
-      sum++;
+      sum++; 
    }
 
    console.log('DaySix-PartTwo', sum);
