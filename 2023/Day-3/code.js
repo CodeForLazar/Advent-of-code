@@ -31,7 +31,40 @@ exports.fistStar = () => {
 };
 
 exports.secondStar = () => {
-   let sum = 0;
+   let sum = [];
+
+   for (let i = 0; i < data.length; i++) {
+      const row = data[i];
+      const foundSymbols = [...row.matchAll(/\*/g)];
+
+      foundSymbols.forEach((match) => {
+         const { index } = match;
+         let foundNumbers = [];
+
+         for (let j = i - 1; j <= i + 1; j++) {
+            const rowNumbers = [...data[j].matchAll(/[\d]+/g)];
+
+            rowNumbers.forEach(({ 0: number, index: indexStart }) => {
+               const indexEnd = indexStart + number.length - 1;
+               if (
+                  index === indexStart ||
+                  index === indexEnd ||
+                  index - 1 === indexStart ||
+                  index - 1 === indexEnd ||
+                  index + 1 === indexStart ||
+                  index + 1 === indexEnd
+               ) {
+                  foundNumbers.push(number);
+               }
+            });
+         }
+         if (foundNumbers.length === 2) {
+            const ratio = foundNumbers.reduce((acc, num) => acc * num, 1);
+            sum.push(ratio);
+         }
+      });
+   }
+   sum = sum.reduce((acc, num) => acc + num, 0);
 
    console.log('DayThree-PartTwo', sum);
 };
