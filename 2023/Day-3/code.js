@@ -3,28 +3,6 @@ const path = require('path');
 
 const data = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').split('\r\n');
 
-const sum1 = () =>
-   data
-      .flatMap((row, y) => {
-         const foundNumbers = [...row.matchAll(/[\d]+/g)];
-         return foundNumbers.flatMap((match) => {
-            const { 0: number, index: x } = match;
-            return adjacentToSymbol(data, x, x + number.length - 1, y) ? [parseInt(number)] : [];
-         });
-      })
-      .reduce((a, b) => a + b, 0);
-
-const adjacentToSymbol = (data, x1, x2, row) => {
-   for (let y = row - 1; y <= row + 1; y++) {
-      for (let x = x1 - 1; x <= x2 + 1; x++) {
-         if (!data[y] || !data[y][x]) continue;
-         const c = data[y][x];
-         if (c != '.' && !(c >= '0' && c <= '9')) return true;
-      }
-   }
-   return false;
-};
-
 exports.fistStar = () => {
    let sum = [];
 
