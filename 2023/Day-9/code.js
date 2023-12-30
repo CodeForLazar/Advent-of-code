@@ -49,8 +49,6 @@ exports.secondStar = () => {
          map.push(temp);
       }
 
-      let calcSum = 0;
-
       for (let k = map.length - 1; k > 0; k--) {
          const row = map[k][0];
          const row2 = map[k - 1][0];
