@@ -3,25 +3,34 @@ const path = require('path');
 
 const data = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').split('\r\n');
 
-const game = data.map((info) => info.split(' '));
+const game = data.map((info) => info.split(' ').map((num) => +num));
 
 exports.fistStar = () => {
    let sum = 0;
 
    for (let i = 0; i < game.length; i++) {
-      const row = game[i];
-      let map = [row]
+      let map = [game[i]];
 
-      for (let j = 0; j < row.length -1; j++) {
-         const curr = +row[j];
-         const next = +row[j + 1];
-
-         console.log('curr next', (next - curr))
+      while (!map.at(-1).every((num) => num === 0)) {
+         let lastRow = map.at(-1);
+         let temp = [];
+         for (let j = 0; j < lastRow.length - 1; j++) {
+            let diff = +lastRow[j + 1] - +lastRow[j];
+            temp.push(diff);
+         }
+         map.push(temp);
       }
 
-   }
+      let calcSum = 0;
 
-   console.log('DaySix-PartOne', game);
+      for (let k = map.length - 1; k >= 0; k--) {
+         const row = map[k];
+         calcSum += row.at(-1);
+      }
+
+      sum += calcSum;
+   }
+   console.log('DaySix-PartOne', sum);
 };
 
 exports.secondStar = () => {

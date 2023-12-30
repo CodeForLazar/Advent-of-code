@@ -15,7 +15,7 @@ const dayNine = require('./Day-9/code');
 // dayTwo.secondStar();
 
 // dayThree.fistStar();
-dayThree.secondStar();
+// dayThree.secondStar();
 
 // dayFour.fistStar();
 // dayFour.secondStar();
@@ -34,6 +34,6 @@ dayThree.secondStar();
 // dayEight.fistStar();
 // dayEight.secondStar();
 
-// dayNine.fistStar();
+dayNine.fistStar();
 // dayNine.secondStar();
 
