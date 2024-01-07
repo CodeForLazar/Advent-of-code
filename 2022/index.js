@@ -16,5 +16,5 @@ const dayFive = require('./Day-5/Code');
 // dayFour.firstStar();
 // dayFour.secondStar();
 
-dayFive.firstStar()
-// dayFive.secondStar()
+// dayFive.firstStar()
+dayFive.secondStar()

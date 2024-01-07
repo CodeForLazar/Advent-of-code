@@ -15,7 +15,7 @@ const indexes = dataMap
    .filter((row) => /\d/.test(row))
    .flatMap((row) => row.trim().split(/\s+/).map(Number));
 
-const colRows = Array(indexes.at(-1))
+let colRows = Array(indexes.at(-1))
    .fill(0)
    .map((x) => []);
 
@@ -56,7 +56,21 @@ exports.firstStar = () => {
 };
 
 exports.secondStar = () => {
-   let sum = 0;
+   let sum = '';
+
+   for (let i = 0; i < dataNav.length; i++) {
+      const howMany = [dataNav[i][0]];
+      const from = dataNav[i][1] - 1;
+      const to = dataNav[i][2] - 1;
+
+      let crates = colRows[from].splice(-howMany);
+
+      colRows[to] = colRows[to].concat(crates);
+   }
+
+   colRows.forEach((row) => {
+      sum += row.at(-1);
+   });
 
    console.log('DayFive-PartTwo', sum);
 };
