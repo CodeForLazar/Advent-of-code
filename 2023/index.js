@@ -8,31 +8,27 @@ const daySeven = require('./Day-7/code');
 const dayEight = require('./Day-8/code');
 const dayNine = require('./Day-9/code');
 
-// dayOne.fistStar();
-// dayOne.secondStar();
+dayOne.fistStar();
+dayOne.secondStar();
 
-// dayTwo.fistStar();
-// dayTwo.secondStar();
+dayTwo.fistStar();
+dayTwo.secondStar();
 
-// dayThree.fistStar();
-// dayThree.secondStar();
+dayThree.fistStar();
+dayThree.secondStar();
 
-// dayFour.fistStar();
-// dayFour.secondStar();
+dayFour.fistStar();
+dayFour.secondStar();
 
-// dayFive.fistStar();
-// dayFive.secondStar();
+dayFive.fistStar();
 
-// daySix.fistStar();
-// daySix.secondStar();
+daySix.fistStar();
+daySix.secondStar();
 
+daySeven.fistStar();
+daySeven.secondStar();
 
-// daySeven.fistStar();
-// daySeven.secondStar();
-
-
-// dayEight.fistStar();
-// dayEight.secondStar();
+dayEight.fistStar();
 
 dayNine.fistStar();
 dayNine.secondStar();

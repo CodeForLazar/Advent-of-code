@@ -50,7 +50,7 @@ exports.fistStar = () => {
       row++;
    }
 
-   console.log('DaySix-PartOne', sum);
+   console.log('DayEight-PartOne', sum);
 };
 
 const rows = game.reduce((acc, el, idx) => {
@@ -180,5 +180,5 @@ exports.secondStar = () => {
       sum++; 
    }
 
-   console.log('DaySix-PartTwo', sum);
+   console.log('DayEight-PartTwo', sum);
 };
