@@ -22,7 +22,6 @@ exports.firstStar = () => {
    let sum = [];
    let numberOfSequences = 0;
    let addSignals = 1;
-   let addNowDelay = false;
 
    for (let i = 0; i < formatData.length; i++) {
       const [command, value] = formatData[i];
