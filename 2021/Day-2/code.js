@@ -32,6 +32,26 @@ exports.firstStar = () => {
 
 exports.secondStar = () => {
    let sum = 0;
+   let forward = 0;
+   let aim = 0;
+   let depth = 0;
+
+   for (let o = 0; o < data.length; o++) {
+      const [move, value] = data[o];
+
+      if (move === 'forward') {
+         forward += +value;
+         depth += +value * aim;
+      }
+      if (move === 'up') {
+         aim -= +value;
+      }
+      if (move === 'down') {
+         aim += +value;
+      }
+   }
+
+   sum = forward * depth;
 
    console.log('DayOne-PartTwo', sum);
 };
