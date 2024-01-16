@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const data = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').split('\r\n');
+let data = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').split('\r\n');
 
 const binaryToDecimal = (binaryNumber) => {
    let reversedBinaryArray = binaryNumber.split('').reverse();
@@ -53,8 +53,50 @@ exports.firstStar = () => {
    console.log('DayOne-PartOne', sum);
 };
 
+const findElements = (element, data) => {
+   let index = 0;
+   while (data.length !== 1) {
+      const copies = {};
+      let columnNumbers = '';
+      for (let i = 0; i < data.length; i++) {
+         const row = data[i];
+         columnNumbers = columnNumbers.concat(row[index]);
+      }
+
+      for (const bin of columnNumbers) {
+         copies[bin] = (copies[bin] || 0) + 1;
+      }
+
+      if (element === 'O2') {
+         if (copies['0'] < copies['1']) {
+            data = data.filter((row) => row[index] === '1');
+         } else if (copies['0'] === copies['1']) {
+            data = data.filter((row) => row[index] === '1');
+         } else {
+            data = data.filter((row) => row[index] === '0');
+         }
+      } else {
+         if (copies['0'] < copies['1']) {
+            data = data.filter((row) => row[index] === '0');
+         } else if (copies['0'] === copies['1']) {
+            data = data.filter((row) => row[index] === '0');
+         } else {
+            data = data.filter((row) => row[index] === '1');
+         }
+      }
+
+      index++;
+   }
+
+   return binaryToDecimal(data[0]);
+};
+
 exports.secondStar = () => {
    let sum = 0;
+   let O2 = findElements('O2', data);
+   let CO2 = findElements('CO2', data);
+
+   sum = O2 * CO2;
 
    console.log('DayOne-PartTwo', sum);
 };
