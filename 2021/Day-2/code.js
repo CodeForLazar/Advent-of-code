@@ -27,7 +27,7 @@ exports.firstStar = () => {
 
    sum = forward * depth;
 
-   console.log('DayOne-PartOne', sum);
+   console.log('DayTwo-PartOne', sum);
 };
 
 exports.secondStar = () => {
@@ -53,5 +53,5 @@ exports.secondStar = () => {
 
    sum = forward * depth;
 
-   console.log('DayOne-PartTwo', sum);
+   console.log('DayTwo-PartTwo', sum);
 };
