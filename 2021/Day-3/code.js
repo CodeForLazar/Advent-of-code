@@ -50,7 +50,7 @@ exports.firstStar = () => {
    epsilon = binaryToDecimal(epsilon);
    sum = gama * epsilon;
 
-   console.log('DayOne-PartOne', sum);
+   console.log('DayThree-PartOne', sum);
 };
 
 const findElements = (element, data) => {
@@ -98,5 +98,5 @@ exports.secondStar = () => {
 
    sum = O2 * CO2;
 
-   console.log('DayOne-PartTwo', sum);
+   console.log('DayThree-PartTwo', sum);
 };
