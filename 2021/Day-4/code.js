@@ -75,7 +75,70 @@ exports.firstStar = () => {
 };
 
 exports.secondStar = () => {
-   let sum = 0;
+   let sum = [];
+   let bingoNum;
+   let i;
 
-   console.log('DayFour-PartTwo', sum);
+   done: for (bingoNum of bingoNumbers) {
+      for (i = 0; i < bingoBlocks.length; i++) {
+         const block = bingoBlocks[i];
+
+         for (let j = 0; j < block.length; j++) {
+            const row = block[j];
+
+            for (let o = 0; o < row.length; o++) {
+               const number = row[o];
+
+               if (number === bingoNum) {
+                  row[o] = row[o].concat('*');
+               }
+            }
+
+            if (row.every((num) => num.includes('*'))) {
+               if (sum.indexOf(i) === -1) {
+                  sum.push(i);
+               }
+               if (bingoBlocks.length === sum.length) {
+                  break done;
+               }
+            }
+         }
+         let flatBlock = block.flat(1);
+         for (let q = 0; q < flatBlock.length; q++) {
+            const row = flatBlock[q];
+            const row2 = flatBlock[q + 5];
+            const row3 = flatBlock[q + 10];
+            const row4 = flatBlock[q + 15];
+            const row5 = flatBlock[q + 20];
+            if (!row5) {
+               break;
+            }
+            if (
+               row.includes('*') &&
+               row2.includes('*') &&
+               row3.includes('*') &&
+               row4.includes('*') &&
+               row5.includes('*')
+            ) {
+               if (sum.indexOf(i) === -1) {
+                  sum.push(i);
+               }
+               if (bingoBlocks.length === sum.length) {
+                  break done;
+               }
+            }
+         }
+      }
+   }
+
+   sum = bingoBlocks[i].flat(1).reduce((acc, num) => {
+      if (!num.includes('*')) {
+         acc = acc + +num;
+      }
+      return acc;
+   }, 0);
+
+   sum = sum * bingoNum;
+
+   console.log('DayFour-PartOne', sum);
 };
