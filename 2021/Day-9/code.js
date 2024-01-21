@@ -29,11 +29,11 @@ exports.firstStar = () => {
 
    sum = sum.reduce((acc, num) => acc + num, 0);
 
-   console.log('DayEight-PartOne', sum);
+   console.log('DayNine-PartOne', sum);
 };
 
 exports.secondStar = () => {
    let sum = [];
 
-   console.log('DayEight-PartTwo', sum);
+   console.log('DayNine-PartTwo', sum);
 };
