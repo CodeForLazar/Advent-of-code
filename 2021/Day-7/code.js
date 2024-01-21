@@ -30,7 +30,30 @@ exports.firstStar = () => {
 };
 
 exports.secondStar = () => {
-   let sum = 0;
+   let sum = [];
+   const maxPosition = Math.max(...data);
+
+   for (let position = 0; position < maxPosition; position++) {
+      sum.push(0);
+
+      for (let j = 0; j < data.length; j++) {
+         let crab = data[j];
+         let gas = 1
+
+         while (crab > position) {
+            crab--;
+            sum[position] = (sum[position] || 0) + gas;
+            gas++
+         }
+         while (crab < position) {
+            crab++;
+            sum[position] = (sum[position] || 0) + gas;
+            ++gas
+         }
+      }
+   }
+
+   sum = Math.min(...sum);
 
    console.log('DaySeven-PartOne', sum);
 };
