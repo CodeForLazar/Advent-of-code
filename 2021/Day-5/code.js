@@ -147,5 +147,5 @@ exports.secondStar = () => {
       }
    }
 
-   console.log('DayFive-PartOne', sum);
+   console.log('DayFive-PartTwo', sum);
 };

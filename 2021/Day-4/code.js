@@ -140,5 +140,5 @@ exports.secondStar = () => {
 
    sum = sum * bingoNum;
 
-   console.log('DayFour-PartOne', sum);
+   console.log('DayFour-PartTwo', sum);
 };

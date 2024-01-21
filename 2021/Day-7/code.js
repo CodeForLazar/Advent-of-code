@@ -55,5 +55,5 @@ exports.secondStar = () => {
 
    sum = Math.min(...sum);
 
-   console.log('DaySeven-PartOne', sum);
+   console.log('DaySeven-PartTwo', sum);
 };

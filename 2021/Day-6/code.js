@@ -40,5 +40,5 @@ exports.firstStar = () => {
 exports.secondStar = () => {
    let sum = 0;
 
-   console.log('DaySix-PartOne', sum);
+   console.log('DaySix-PartTwo', sum);
 };

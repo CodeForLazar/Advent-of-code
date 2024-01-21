@@ -5,6 +5,7 @@ const data = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').split('
 const matrix = data.map((row) => {
    return row.split('').map(Number);
 });
+
 exports.firstStar = () => {
    let sum = [];
 
@@ -28,11 +29,11 @@ exports.firstStar = () => {
 
    sum = sum.reduce((acc, num) => acc + num, 0);
 
-   console.log('DaySeven-PartOne', sum);
+   console.log('DayEight-PartOne', sum);
 };
 
 exports.secondStar = () => {
    let sum = [];
 
-   console.log('DaySeven-PartOne', sum);
+   console.log('DayEight-PartTwo', sum);
 };
