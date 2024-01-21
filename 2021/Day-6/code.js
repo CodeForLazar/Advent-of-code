@@ -6,7 +6,7 @@ const data = fs.readFileSync(path.join(__dirname, 'input.txt'), 'utf-8').split('
 exports.firstStar = () => {
    let sum = [...data];
 
-   const days = 2;
+   const days = 80;
    let dayIndex = 0;
 
    sum.sort((a, b) => a - b);
