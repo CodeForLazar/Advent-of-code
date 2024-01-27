@@ -12,30 +12,42 @@ const data = fs
       return newRow;
    });
 
-exports.firstStar = () => {
-   let sum = 0;
-   let index = 3;
-
-   for (let i = 0; i < data.length; i++) {
-      const row = data[i + 1];
+const findTries = (index, skipRow) => {
+   let result = 0;
+   let increment = index;
+   for (let i = skipRow; i < data.length; i += skipRow) {
+      const row = data[i];
       if (!row) break;
 
-      if (index > row.length - 1) {
-         index = index - row.length;
+      if (increment > row.length - 1) {
+         increment = increment - row.length;
       }
-      
-      if (row[index] === '#') {
-         sum++;
+      if (row[increment] === '#') {
+         result++;
       }
-
-      index += 3;
+      increment += index;
    }
+   return result;
+};
+
+exports.firstStar = () => {
+   let sum = 0;
+
+   sum = findTries(3, 1);
 
    console.log('DayThree-PartOne', sum);
 };
 
 exports.secondStar = () => {
    let sum = 0;
+
+   const one = findTries(1, 1);
+   const three = findTries(3, 1);
+   const five = findTries(5, 1);
+   const seven = findTries(7, 1);
+   const double = findTries(1, 2);
+
+   sum = one * three * five * seven * double;
 
    console.log('DayThree-PartTwo', sum);
 };
