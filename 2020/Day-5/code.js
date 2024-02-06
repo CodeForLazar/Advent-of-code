@@ -40,7 +40,39 @@ exports.firstStar = () => {
 };
 
 exports.secondStar = () => {
-   let sum = 0;
+   let sum = [];
 
-   console.log('DayFive-PartTwo', sum);
+   for (let i = 0; i < data.length; i++) {
+      let maxRow = 127;
+      let maxCol = 7;
+      let min = 0;
+      const rowMap = data[i].substring(0, 7);
+      const colMap = data[i].substring(7);
+
+      for (let j = 0; j < rowMap.length; j++) {
+         const char = rowMap[j];
+         [min, maxRow] = findTheMiddle(min, maxRow, char);
+         sum[i] = maxRow;
+      }
+      min = 0;
+      for (let k = 0; k < colMap.length; k++) {
+         const char = colMap[k];
+         [min, maxCol] = findTheMiddle(min, maxCol, char);
+      }
+      sum[i] = sum[i] * 8 + maxCol;
+   }
+
+   sum = sum.sort((a, b) => a - b);
+   let seat = 0;
+   for (let i = 1; i < sum.length; i++) {
+      seat = sum[i];
+      const prevSeat = sum[i - 1];
+      const nextSeat = sum[i + 1];
+      if (seat + 1 !== nextSeat) {
+         seat = nextSeat - 1;
+         break;
+      }
+   }
+
+   console.log('DayFive-PartTwo', seat);
 };
