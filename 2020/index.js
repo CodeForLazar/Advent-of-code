@@ -22,7 +22,7 @@ const daySix = require('./Day-6/code');
 // dayFive.firstStar()
 // dayFive.secondStar()
 
-daySix.firstStar()
+// daySix.firstStar()
 daySix.secondStar()
 
 // daySeven.firstStar()
