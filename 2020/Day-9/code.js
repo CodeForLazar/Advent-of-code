@@ -6,43 +6,64 @@ const data = fs
    .split('\r\n')
    .map((num) => Number(num));
 
-exports.firstStar = () => {
-   let sum = false;
-   let startSlice = 0;
-   let endSlice = 25;
+function findInvalidNumber(data, preambleLength) {
+   for (let i = preambleLength; i < data.length; i++) {
+      if (!isValidNumber(data, i, preambleLength)) {
+         return data[i];
+      }
+   }
+   return null;
+}
 
-   for (let i = 25; i < data.length; i++) {
-      let arrToCheck = data.slice(startSlice, endSlice);
-      const numToCheck = data[i];
-
-      for (let j = 0; j < arrToCheck.length; j++) {
-         const num = arrToCheck[j];
-         for (let q = 0; q < arrToCheck.length; q++) {
-            const num2 = arrToCheck[q];
-            if (j === q) {
-               continue;
-            }
-            if (num + num2 === numToCheck) {
-               sum = true;
-            }
+function isValidNumber(data, currentIndex, preambleLength) {
+   for (let j = currentIndex - preambleLength; j < currentIndex; j++) {
+      for (let q = currentIndex - preambleLength; q < currentIndex; q++) {
+         if (j === q) {
+            continue;
+         }
+         const num1 = data[j];
+         const num2 = data[q];
+         const currentNum = data[currentIndex];
+         if (num1 + num2 === currentNum) {
+            return true;
          }
       }
-
-      if (!sum) {
-         sum = numToCheck;
-         break;
-      }
-
-      startSlice++;
-      endSlice++;
-      sum = false;
    }
+   return false;
+}
 
-   console.log('DayNine-PartOne', sum);
+exports.firstStar = () => {
+   const preambleLength = 25;
+   const invalidNumber = findInvalidNumber(data, preambleLength);
+   console.log('DayNine-PartOne', invalidNumber);
 };
 
 exports.secondStar = () => {
-   let sum = [];
+   let sum = 0;
+   const preambleLength = 25;
+   const invalidNumber = findInvalidNumber(data, preambleLength);
+   let startIdx = 0;
+   let endIdx = 0;
+   let stop = false;
 
-   console.log('DayNine-PartTwo', sum);
+   while (stop === false) {
+      for (let i = startIdx; i < data.length; i++) {
+         const num = data[i];
+         sum += num;
+         if (sum === invalidNumber) {
+            endIdx = i + 1;
+            stop = true;
+            break;
+         }
+      }
+      if (sum === invalidNumber) break;
+      sum = 0;
+      startIdx++;
+   }
+
+   sum = data.slice(startIdx, endIdx);
+   const min = Math.min(...sum);
+   const max = Math.max(...sum);
+
+   console.log('DayNine-PartTwo', min + max);
 };
