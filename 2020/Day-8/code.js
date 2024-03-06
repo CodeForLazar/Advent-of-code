@@ -37,11 +37,11 @@ exports.firstStar = () => {
       }
    }
 
-   console.log('DaySix-PartOne', acc);
+   console.log('DayEight-PartOne', acc);
 };
 
 exports.secondStar = () => {
    let sum = [];
 
-   console.log('DaySix-PartTwo', sum);
+   console.log('DayEight-PartTwo', sum);
 };

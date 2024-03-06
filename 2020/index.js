@@ -5,7 +5,7 @@ const dayFour = require('./Day-4/code');
 const dayFive = require('./Day-5/code');
 const daySix = require('./Day-6/code');
 const day8 = require('./Day-8/code');
-// const dayNine = require('./Day-9/code');
+const dayNine = require('./Day-9/code');
 
 // dayOne.firstStar();
 // dayOne.secondStar();
@@ -25,11 +25,11 @@ const day8 = require('./Day-8/code');
 // daySix.firstStar()
 // daySix.secondStar()
 
-day8.firstStar()
-day8.secondStar()
+// day8.firstStar()
+// day8.secondStar()
 
-// dayNine.firstStar()
-// dayNine.secondStar()
+dayNine.firstStar()
+dayNine.secondStar()
 
 // dayTen.firstStar()
 // dayTen.secondStar()
