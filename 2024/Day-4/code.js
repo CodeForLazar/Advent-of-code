@@ -49,6 +49,35 @@ exports.fistStar = () => {
 exports.secondStar = () => {
    let sum = 0;
 
+   const reverseDirDiagon = (key) => {
+      switch (key) {
+         case 'upR':
+            return 'downL';
+         case 'upL':
+            return 'downR';
+         case 'downR':
+            return 'upL';
+         case 'downL':
+            return 'upR';
+         default:
+            return null;
+      }
+   };
+   const reverseDirNext = (key) => {
+      switch (key) {
+         case 'upR':
+            return 'upL';
+         case 'upL':
+            return 'upR';
+         case 'downR':
+            return 'downL';
+         case 'downL':
+            return 'downR';
+         default:
+            return null;
+      }
+   };
+
    for (let i = 0; i < data.length; i++) {
       const row = data[i];
       for (let j = 0; j < row.length; j++) {
@@ -63,48 +92,24 @@ exports.secondStar = () => {
             };
          };
 
-         const reverseDirDiagon = (key) => {
-            switch (key) {
-               case 'upR':
-                  return 'downL';
-               case 'upL':
-                  return 'downR';
-               case 'downR':
-                  return 'upL';
-               case 'downL':
-                  return 'upR';
-               default:
-                  return null;
-            }
-         };
-         const reverseDirNext = (key) => {
-            switch (key) {
-               case 'upR':
-                  return 'upL';
-               case 'upL':
-                  return 'upR';
-               case 'downR':
-                  return 'downL';
-               case 'downL':
-                  return 'downR';
-               default:
-                  return null;
-            }
-         };
-
          if (col === 'A') {
-            Object.entries(getNeighbors()).map(([key, value]) => {
-               let dCheck = 0;
-               if (value === 'S') {
+            let dCheck = 0;
+            const positions = getNeighbors();
+            let stop = false;
+
+            Object.entries(positions).map(([key, value]) => {
+               if (stop) return;
+               if (value === 'M') {
+                  stop = true;
                   const dir = reverseDirDiagon(key);
-                  const nextVal = getNeighbors()[dir];
-                  if (nextVal === 'M') {
+                  const nextVal = positions[dir];
+                  if (nextVal === 'S') {
                      dCheck++;
                   }
-                  const oposite = getNeighbors()[reverseDirNext(key)];
-                  if (oposite === ('S' || 'M')) {
+                  const oposite = positions[reverseDirNext(key)];
+                  if (oposite === 'S' || oposite === 'M') {
                      const dir = reverseDirDiagon(reverseDirNext(key));
-                     const nextVal = getNeighbors()[dir];
+                     const nextVal = positions[dir];
                      if (
                         (oposite === 'S' && nextVal === 'M') ||
                         (oposite === 'M' && nextVal === 'S')
